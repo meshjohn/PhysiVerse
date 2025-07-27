@@ -1,4 +1,3 @@
-
 import { getAllBlogs } from "@/app/data/blogs/get-all-blogs";
 import {
   PublicCourseCardSkeleton,
@@ -6,6 +5,8 @@ import {
 } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 import { PublicBlogCard } from "../_components/PublicBlogCard";
+
+export const dynamic = "force-static";
 
 export default function PublicBlogsroute() {
   return (

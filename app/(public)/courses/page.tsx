@@ -5,6 +5,8 @@ import {
 } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 
+export const dynamic = 'force-static'
+
 export default function PublicCoursesroute() {
   return (
     <div className="mt-5">
