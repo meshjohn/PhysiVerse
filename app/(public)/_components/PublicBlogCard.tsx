@@ -25,7 +25,7 @@ export function PublicBlogCard({ data }: iAppProps) {
       />
       <CardContent className="p-4">
         <Link
-          href={`/courses/${data.slug}`}
+          href={`/blogs/${data.slug}`}
           className="font-medium text-lg line-clamp-2 hover:underline group-hover:text-primary transition-colors"
         >
           {data.title}
@@ -58,7 +58,7 @@ export function PublicCourseCardSkeleton() {
           <Skeleton className="h-6 w-full" />
           <Skeleton className="h-6 w-3/4" />
         </div>
- 
+
         <div className="mt-4 flex items-center gap-x-5">
           <div className="flex items-center gap-x-2">
             <Skeleton className="size-6 rounded-md" />

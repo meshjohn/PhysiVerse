@@ -18,10 +18,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
 import { useSignout } from "@/hooks/use-signout";
+import { IconArticleFilled, IconSettings } from "@tabler/icons-react";
+import { authClient } from "@/lib/auth-client";
 
 interface iAppProps {
   name: string;
@@ -30,6 +29,8 @@ interface iAppProps {
 }
 
 export default function UserDropdown({ name, email, image }: iAppProps) {
+  const { data: session, isPending } = authClient.useSession();
+
   const handleSignOut = useSignout();
   return (
     <DropdownMenu>
@@ -79,6 +80,28 @@ export default function UserDropdown({ name, email, image }: iAppProps) {
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/blogs">
+              <IconArticleFilled
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              <span>Blogs</span>
+            </Link>
+          </DropdownMenuItem>
+          {session?.user?.role === "admin" && (
+            <DropdownMenuItem asChild>
+              <Link href="/admin">
+                <IconSettings
+                  size={16}
+                  className="opacity-60"
+                  aria-hidden="true"
+                />
+                <span>Admin</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut}>

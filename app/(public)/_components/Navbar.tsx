@@ -26,8 +26,8 @@ export function Navbar() {
           <span className="font-bold">PhysiVerse</span>
         </Link>
         {/* Desktop navigation */}
-        <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
-          <div className="flex items-center space-x-2">
+        <nav className="flex flex-1 items-center justify-between max-md:justify-end">
+          <div className="hidden md:flex items-center space-x-2">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
@@ -38,7 +38,7 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex space-x-4 items-center">
             <ThemeToggle />
             {isPending ? null : session ? (
               <UserDropdown
@@ -61,7 +61,9 @@ export function Navbar() {
                 >
                   Login
                 </Link>
-                <Link href="/login">Get Started</Link>
+                <Link href="/login" className="max-md:hidden">
+                  Get Started
+                </Link>
               </>
             )}
           </div>

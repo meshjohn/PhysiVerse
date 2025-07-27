@@ -1,14 +1,18 @@
 import { getAllBlogs } from "@/app/data/blogs/get-all-blogs";
-import {
-  PublicCourseCardSkeleton,
-  PublicCoursesCard,
-} from "../_components/PublicCourseCard";
+import { PublicCourseCardSkeleton } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
-import { PublicBlogCard } from "../_components/PublicBlogCard";
+import PublicBlogsClient from "../_components/PublicBlogClient";
 
 export const dynamic = "force-dynamic";
 
-export default function PublicBlogsroute() {
+export default async function PublicBlogsroute({
+  searchParams,
+}: NextPageProps<{}, { search?: string }>) {
+  const resolvedSearchParams = await searchParams; // Renamed to avoid confusion
+
+  // Now you can safely access properties on resolvedSearchParams
+  const search = resolvedSearchParams?.search ?? "";
+  const blogs = await getAllBlogs(search);
   return (
     <div className="mt-5">
       <div className="flex flex-col space-y-2 mb-10">
@@ -21,19 +25,8 @@ export default function PublicBlogsroute() {
         </p>
       </div>
       <Suspense fallback={<LoadingSkeletonLayout />}>
-        <RenderBlogs />
+        <PublicBlogsClient blogs={blogs} />
       </Suspense>
-    </div>
-  );
-}
-
-async function RenderBlogs() {
-  const blogs = await getAllBlogs();
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {blogs.map((blog) => (
-        <PublicBlogCard key={blog.id} data={blog} />
-      ))}
     </div>
   );
 }

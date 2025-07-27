@@ -1,5 +1,4 @@
 import { PublicCourseType } from "@/app/data/course/get-all-courses";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";

@@ -10,19 +10,41 @@ import {
 import { Suspense } from "react";
 import { EmptyState } from "@/components/general/EmptyState";
 import { adminGetDashboardStats } from "../data/admin/admin-get-dashboard-stats";
+import { subDays, format } from "date-fns";
+import { prisma } from "@/lib/db";
 
 export default async function AdminIndexPage() {
   const stats = await adminGetDashboardStats();
+  const startDate = subDays(new Date(), 30);
 
-  // If ChartBarInteractive expects an array of stats, you need to transform the object accordingly.
-  // For now, let's assume you want to show totalSignUps as a single data point:
-  const chartData = [
-    {
-      date: new Date().toISOString().split('T')[0], // today's date as an example
-      total: stats.totalSignUps,
+  // Get all users created in the last 30 days
+  const users = await prisma.user.findMany({
+    where: {
+      createdAt: {
+        gte: startDate,
+      },
     },
-  ];
+    select: {
+      createdAt: true,
+    },
+  });
 
+  // Build the chart data structure
+  const dailyCounts: Record<string, number> = {};
+
+  users.forEach((user) => {
+    const dateStr = format(user.createdAt, "MM-dd");
+    dailyCounts[dateStr] = (dailyCounts[dateStr] || 0) + 1;
+  });
+
+  // Fill in all 30 days
+  const chartData = Array.from({ length: 30 }, (_, i) => {
+    const date = format(subDays(new Date(), 29 - i), "MM-dd");
+    return {
+      date,
+      total: dailyCounts[date] || 0,
+    };
+  });
   return (
     <>
       <SectionCards />

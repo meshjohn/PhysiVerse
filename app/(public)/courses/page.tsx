@@ -1,16 +1,22 @@
+// app/(routes)/courses/page.tsx
+
 import { getAllCourses } from "@/app/data/course/get-all-courses";
-import {
-  PublicCourseCardSkeleton,
-  PublicCoursesCard,
-} from "../_components/PublicCourseCard";
+import PublicCoursesClient from "../_components/PublicCourseClient";
+import { PublicCourseCardSkeleton } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+export default async function CoursesPage({
+  searchParams,
+}: NextPageProps<{}, { search?: string }>) {
+  const resolvedSearchParams = await searchParams; // Renamed to avoid confusion
 
-export default function PublicCoursesroute() {
+  // Now you can safely access properties on resolvedSearchParams
+  const search = resolvedSearchParams?.search ?? "";
+  const courses = await getAllCourses(search);
+
   return (
     <div className="mt-5">
-      <div className="flex flex-col space-y-2 mb-10">
+      <div className="flex flex-col space-y-2 mb-8">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tighter">
           Explore Courses
         </h1>
@@ -20,19 +26,8 @@ export default function PublicCoursesroute() {
         </p>
       </div>
       <Suspense fallback={<LoadingSkeletonLayout />}>
-        <RenderCourses />
+        <PublicCoursesClient courses={courses} />
       </Suspense>
-    </div>
-  );
-}
-
-async function RenderCourses() {
-  const courses = await getAllCourses();
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {courses.map((course) => (
-        <PublicCoursesCard key={course.id} data={course} />
-      ))}
     </div>
   );
 }
