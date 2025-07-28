@@ -45,6 +45,8 @@ import { useRouter } from "next/navigation";
 import { useConfetti } from "@/hooks/use-confetti";
 import slugify from "slugify";
 
+export const dynamic = "force-dynamic";
+
 export default function CourseCreationPage() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();

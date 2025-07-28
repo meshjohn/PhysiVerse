@@ -46,6 +46,8 @@ import { useConfetti } from "@/hooks/use-confetti";
 import slugify from "slugify";
 import { CreateBlog } from "./actions";
 
+export const dynamic = "force-dynamic";
+
 export default function CourseCreationPage() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();

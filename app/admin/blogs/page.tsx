@@ -1,10 +1,8 @@
-import { adminGetCourses } from "@/app/data/admin/admin-get-courses";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { EmptyState } from "@/components/general/EmptyState";
 import { Suspense } from "react";
 import {
-  AdminCourseCard,
   AdminCourseCardSkeleton,
 } from "../courses/_components/AdminCourseCard";
 import { adminGetBlogs } from "@/app/data/admin/admin-get-blogs";
