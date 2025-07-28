@@ -2,11 +2,11 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { EmptyState } from "@/components/general/EmptyState";
 import { Suspense } from "react";
-import {
-  AdminCourseCardSkeleton,
-} from "../courses/_components/AdminCourseCard";
+import { AdminCourseCardSkeleton } from "../courses/_components/AdminCourseCard";
 import { adminGetBlogs } from "@/app/data/admin/admin-get-blogs";
 import { AdminBlogCard } from "./_components/AdminBlogsCard";
+
+export const dynamic = "force-dynamic";
 
 export default function BlogsPage() {
   return (

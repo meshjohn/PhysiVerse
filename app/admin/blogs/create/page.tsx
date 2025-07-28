@@ -14,8 +14,6 @@ import { useForm } from "react-hook-form";
 import {
   blogSchema,
   BlogSchemaType,
-  courseCategories,
-  CourseSchemaType,
   courseStatus,
 } from "@/lib/zodSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";

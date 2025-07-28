@@ -9,12 +9,14 @@ import {
 } from "./courses/_components/AdminCourseCard";
 import { Suspense } from "react";
 import { EmptyState } from "@/components/general/EmptyState";
-import { adminGetDashboardStats } from "../data/admin/admin-get-dashboard-stats";
+import {  } from "../data/admin/admin-get-dashboard-stats";
 import { subDays, format } from "date-fns";
 import { prisma } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
+
 export default async function AdminIndexPage() {
-  const stats = await adminGetDashboardStats();
   const startDate = subDays(new Date(), 30);
 
   // Get all users created in the last 30 days
