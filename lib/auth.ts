@@ -18,6 +18,9 @@ export const auth = betterAuth({
       clientSecret: env.FACEBOOK_CLIENT_SECRET,
     },
   },
+  pages:{ 
+    error: "/error",
+  },
   plugins: [
     admin(),
   ],

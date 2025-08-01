@@ -46,6 +46,11 @@ const data = {
       url: "/admin/blogs",
       icon: IconListTree,
     },
+    {
+      title: "Users",
+      url: "/admin/users",
+      icon: IconUsers,
+    },
   ],
 };
 
