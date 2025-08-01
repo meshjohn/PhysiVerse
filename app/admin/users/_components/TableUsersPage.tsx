@@ -36,6 +36,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { toast } from "sonner"
+import { tryCatch } from "@/hooks/try-catch"
+import { deleteUser } from "../action"
+import { useRouter } from "next/navigation"
 
 type Role = "user" | "admin";
 
@@ -108,25 +111,20 @@ export const columns: ColumnDef<Users>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       return (
-        <Button onClick={async () => {
-    const confirmed = confirm("Are you sure you want to delete this user?");
-    if (!confirmed) return;
-
-    try {
-      const res = await fetch(`/api/admin/users/${row.original.id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      if (!res.ok) throw new Error("Failed to delete user");
-      // Optionally trigger re-fetch or remove from local state
-      toast.success("User deleted successfully");
-      location.reload(); // Reload the page to reflect changes
-    } catch (error) {
-      console.error("Delete error:", error);
-      toast.error("User failed to delete");
-    }
-  }} variant="ghost" className="hover:bg-transparent">
+        <Button className="hover:bg-transparent!" variant="ghost" onClick={async () => {
+          const { data: result, error } = await tryCatch(deleteUser(row.original.id));
+          if (error) {
+            toast.error("An unexpected error occurred. Please try again.");
+            return;
+          }
+          if (result.status === "success") {
+            toast.success(result.message);
+            location.reload();
+        } else if (result.status === "error") {
+            toast.error(result.message);
+          }
+        }}
+      >
             <Trash2 className="h-4 w-4 text-red-500" />
         </Button>
       )
@@ -145,6 +143,8 @@ export function DataTableUsers({ serverData }: { serverData: Users[] }) {
   React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
     const [filterValue, setFilterValue] = React.useState("");
+  const [pending, startTransition] = React.useTransition();
+  const router = useRouter();
 
  const table = useReactTable({
   data,

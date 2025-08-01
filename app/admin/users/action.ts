@@ -22,7 +22,7 @@ const aj = arcjet
     })
   );
 
-export async function deleteBlog(blogId: string): Promise<ApiResponse> {
+export async function deleteUser(userId: string): Promise<ApiResponse> {
   const session = await requireAdmin();
   try {
     const req = await request();
@@ -42,21 +42,21 @@ export async function deleteBlog(blogId: string): Promise<ApiResponse> {
         };
       }
     }
-    await prisma.blog.delete({
+    await prisma.user.delete({
       where: {
-        id: blogId,
+        id: userId,
       },
     });
-    revalidatePath("/admin/blogs");
+    revalidatePath("/admin/users");
     return {
       status: "success",
-      message: "Blog deleted successfully",
+      message: "User deleted successfully",
     };
   } catch (error) {
     console.log(error);
     return {
       status: "error",
-      message: "Failed to delete blog",
+      message: "Failed to delete course",
     };
   }
 }
