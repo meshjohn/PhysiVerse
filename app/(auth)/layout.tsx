@@ -2,7 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Logo from "@/public/logo2.png";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
@@ -26,7 +26,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           <Image src={Logo} alt="logo" width={32} height={32} />
           PhysiVerse
         </Link>
+        <Suspense fallback={<div className="text-center">Loading...</div>}>
         {children}
+        </Suspense>
         <div className="w-[383px] text-balance text-center text-xs text-muted-foreground">
           By clicking continue, you agree to our{" "}
           <span className="hover:text-primary hover:underline">
