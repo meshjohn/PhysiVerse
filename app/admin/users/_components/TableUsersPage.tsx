@@ -112,6 +112,8 @@ export const columns: ColumnDef<Users>[] = [
     cell: ({ row }) => {
       return (
         <Button className="hover:bg-transparent!" variant="ghost" onClick={async () => {
+           const confirmed = window.confirm("Are you sure you want to delete this user?");
+          if (!confirmed) return;
           const { data: result, error } = await tryCatch(deleteUser(row.original.id));
           if (error) {
             toast.error("An unexpected error occurred. Please try again.");
