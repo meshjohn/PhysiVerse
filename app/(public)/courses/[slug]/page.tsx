@@ -59,7 +59,7 @@ export default async function SlugPage({ params }: { params: Params }) {
             </Badge>
             <Badge className="flex items-center gap-1 px-3 py-1">
               <IconClock className="size-4" />
-              <span>{course.duration}hours</span>
+              <span>{course.duration} minutes</span>
             </Badge>
           </div>
           <Separator className="my-8" />
@@ -169,7 +169,7 @@ export default async function SlugPage({ params }: { params: Params }) {
                     <div className="">
                       <p className="text-sm font-medium">Course Duration</p>
                       <p className="text-sm text-muted-foreground">
-                        {course.duration} hours
+                        {course.duration} minutes
                       </p>
                     </div>
                   </div>

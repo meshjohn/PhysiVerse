@@ -44,12 +44,6 @@ export function AdminCourseCard({ data }: iAppProps) {
                 Edit Course
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href={`/admin/courses/${data.slug}`}>
-                <Eye className="size-4 mr-2" />
-                Preview
-              </Link>
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href={`/admin/courses/${data.id}/delete`}>
@@ -80,7 +74,7 @@ export function AdminCourseCard({ data }: iAppProps) {
         <div className="mt-4 flex items-center gap-x-5">
           <div className="flex items-center gap-x-2">
             <TimerIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-            <p className="text-sm text-muted-foreground">{data.duration}min</p>
+            <p className="text-sm text-muted-foreground">{data.duration} m</p>
           </div>
         </div>
         <Link

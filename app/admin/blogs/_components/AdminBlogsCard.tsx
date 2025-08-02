@@ -45,12 +45,6 @@ export function AdminBlogCard({ data }: iAppProps) {
                 Edit Blog
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href={`/admin/blogs/${data.slug}`}>
-                <Eye className="size-4 mr-2" />
-                Preview
-              </Link>
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href={`/admin/blogs/${data.id}/delete`}>

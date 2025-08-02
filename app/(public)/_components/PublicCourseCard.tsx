@@ -35,11 +35,11 @@ export function PublicCoursesCard({ data }: iAppProps) {
         <div className="mt-4 flex items-center gap-x-5">
           <div className="flex items-center gap-x-2">
             <TimerIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-            <p className="text-sm text-muted-foreground">{data.duration}h</p>
+            <p className="text-sm text-muted-foreground">{data.duration} m</p>
           </div>
           <div className="flex items-center gap-x-2">
             <School className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-            <p className="text-sm text-muted-foreground">{data.category}h</p>
+            <p className="text-sm text-muted-foreground">{data.category}</p>
           </div>
         </div>
         <Link
