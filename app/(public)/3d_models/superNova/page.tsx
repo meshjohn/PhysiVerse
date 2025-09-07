@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 
 import { Canvas } from "@react-three/fiber";
 
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, Html } from "@react-three/drei";
 
 function NebulaSkybox(props: any) {
   const { scene } = useGLTF("/nebula_skybox_16k.glb"); // put your file in /public
